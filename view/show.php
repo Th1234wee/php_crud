@@ -28,16 +28,9 @@
                 <th>Price</th>
                 <th>Action</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Coca</td>
-                <td>Drink</td>
-                <td>0.5$</td>
-                <td>
-                   <button class="btn btn-outline-warning"><i class="fa-solid fa-pen-to-square"></i>   Edit</button>
-                   <button class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>  Remove</button> 
-                </td>
-            </tr>
+            <?php 
+                show_product();
+            ?>
         </table>
     </div>
     <?php  

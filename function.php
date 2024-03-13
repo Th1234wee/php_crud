@@ -63,3 +63,27 @@
         }
     }
     add_product();
+    function show_product(){
+        global $connection;
+        $sql_show = "
+                        SELECT * FROM `tbproduct` 
+                        WHERE 1 
+                        ORDER BY `id` DESC;
+                    ";
+        $result   = $connection -> query($sql_show);
+        while($row = mysqli_fetch_assoc($result)){
+            echo '
+                <tr>
+                    <td>'.$row['id'].'</td>
+                    <td>'.$row['name'].'</td>
+                    <td>'.$row['category'].'</td>
+                    <td>'.$row['price'].'</td>
+                    <td>
+                    <button class="btn btn-outline-warning"><i class="fa-solid fa-pen-to-square"></i>   Edit</button>
+                    <button class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>  Remove</button> 
+                    </td>
+                </tr>
+            ';
+        }
+    }
+    
