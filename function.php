@@ -78,12 +78,45 @@
                     <td>'.$row['name'].'</td>
                     <td>'.$row['category'].'</td>
                     <td>'.$row['price'].'</td>
-                    <td>
-                    <button class="btn btn-outline-warning"><i class="fa-solid fa-pen-to-square"></i>   Edit</button>
-                    <button class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>  Remove</button> 
-                    </td>
+                    <form method="post">
+                        <td>
+                            <input type="hidden" name="remove_id" value='.$row['id'].'>
+                            <button class="btn btn-outline-warning"><i class="fa-solid fa-pen-to-square"></i>   Edit</button>
+                            <button name="btn_remove" type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>  Remove</button> 
+                        </td>
+                    </form>
                 </tr>
             ';
         }
     }
+    function remove_product(){
+        global $connection;
+
+        if(isset($_POST['btn_remove'])){
+            $remove_id = $_POST['remove_id'];
+
+            $sql_remove = "
+                                DELETE  FROM `tbproduct`
+                                WHERE `id` = '$remove_id';
+                          "; 
+
+            $result     = $connection -> query($sql_remove);
+            if($result){
+                echo '
+                            <script>
+                                $(document).ready(function(){
+                                    swal({
+                                        title: "Removing Success",
+                                        text: "You remove data successfully",
+                                        icon: "success",
+                                        button: "Confirm",
+                                      });
+                                })
+                            </script>
+                    ';
+
+            }
+        }
+    }
+    remove_product();
     
