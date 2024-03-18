@@ -8,19 +8,21 @@
       </div>
       <div class="modal-body">
         <form action="" method="post">
+            <input type="hidden" name="_id" id="id">
             <label for="name">Name</label>
-            <input type="text" name="_name" class="form-control" placeholder="Enter Name">
+            <input id="name" type="text" name="_name" class="form-control" placeholder="Enter Name">
             <label for="">Category</label>
-            <select class="form-select" name="_category">
+            <select id="category" class="form-select" name="_category">
                 <option value="drink">Drink</option>
                 <option value="Clothes">Clothes</option>
                 <option value="Accessories">Accessories</option>
             </select>
             <label for="name">Price</label>
-            <input type="text" name="_price" class="form-control" placeholder="Enter Price">
+            <input id="price" type="text" name="_price" class="form-control" placeholder="Enter Price">
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                <button name="btn_add" type="submit" class="btn btn-success">Confirm</button>
+                <button id="btn_add" name="btn_add" type="submit" class="btn btn-success">Confirm</button>
+                <button id="btn_update" type="submit" name="btn_update" class="btn btn-warning" >Edit</button>
             </div>
         </form>
       </div>

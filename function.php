@@ -81,8 +81,8 @@
                     <form method="post">
                         <td>
                             <input type="hidden" name="remove_id" value='.$row['id'].'>
-                            <button class="btn btn-outline-warning"><i class="fa-solid fa-pen-to-square"></i>   Edit</button>
-                            <button name="btn_remove" type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>  Remove</button> 
+                            <button id="open_update" type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-pen-to-square"></i>   Edit</button>
+                            <button name="btn_remove" type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>  Remove</button>
                         </td>
                     </form>
                 </tr>
@@ -119,4 +119,66 @@
         }
     }
     remove_product();
+    function edit_product(){
+        global $connection;
+
+        if(isset($_POST['btn_update'])){
+            $updated_id = $_POST['_id'];
+            $name       = $_POST['_name'];
+            $category   = $_POST['_category'];
+            $price      = $_POST['_price'];
+
+            if(!empty($name) && !empty($category) && !empty($price)){
+                $sql_edit = "
+                                UPDATE `tbproduct` 
+                                SET `name` = '$name',`category` = '$category',`price`='$price'
+                                WHERE `id` = '$updated_id';
+                            ";
+                $result = $connection -> query($sql_edit);
+                if($result){
+                    echo '
+                            <script>
+                                $(document).ready(function(){
+                                    swal({
+                                        title: "Edit Success",
+                                        text: "You edit data successfully",
+                                        icon: "success",
+                                        button: "Confirm",
+                                      });
+                                })
+                            </script>
+                    ';
+                }
+                else{
+                    echo '
+                            <script>
+                                $(document).ready(function(){
+                                    swal({
+                                        title: "Something went wrong",
+                                        text: "Cannot edit data",
+                                        icon: "error",
+                                        button: "Confirm",
+                                      });
+                                })
+                            </script>
+                    ';
+                }
+            }
+            else{
+                echo '
+                        <script>
+                            $(document).ready(function(){
+                                swal({
+                                    title: "Invaild Data",
+                                    text: "All field must be filled",
+                                    icon: "error",
+                                    button: "Confirm",
+                                  });
+                            })
+                        </script>
+                ';
+            }
+        }
+    }
+    edit_product();
     
